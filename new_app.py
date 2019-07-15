@@ -4,9 +4,11 @@ from constants import PLAYERS, TEAMS
 def clear():
     os.system('clear' if os.name == 'posix' else 'cls')
 
-teams = {}
-for team in enumerate(TEAMS, 1): # each team is paired w/ a #
-    teams["team{0}".format(team[0])] = team[1]
+teams = []
+for team_tuple in enumerate(TEAMS, 1): # each team is paired w/ a #
+    team = {}
+    team["team{0}".format(team_tuple[0])] = team_tuple[1]
+    teams.append(team)
 
 print(teams)
 # WORK TBD: Each team is it's own dictionary.
