@@ -7,10 +7,13 @@ def clear():
 teams = []
 for team_tuple in enumerate(TEAMS, 1): # each team is paired w/ a #
     team = {}
-    team["team{0}".format(team_tuple[0])] = team_tuple[1]
+    team['name'] = team_tuple[1]
+    team['number'] = team_tuple[0]
     teams.append(team)
 
 print(teams)
+print(teams[0])
+
 # WORK TBD: Each team is it's own dictionary.
 
 
