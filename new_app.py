@@ -2,6 +2,7 @@ import os
 import copy
 from constants import PLAYERS, TEAMS
 
+
 def clear():
     os.system('clear' if os.name == 'posix' else 'cls')
 
@@ -11,17 +12,17 @@ inexperienced_players = []
 players = copy.deepcopy(PLAYERS)
 
 
-#for loop to create filtered data.
+# Data restructuring
 for player in players:
     client = player
     height = client['height']
     guardians_slice_index = client['guardians'].find(' and ')
 
-    #slices string of 'height' then converts to int.
+    # slices string of 'height' then converts to int.
     if type(height) != int:
         client['height'] = int(height[0:2])
 
-    #converts each string of 'guardians' into a list of strings.
+    # converts each string of 'guardians' into a list of strings.
     if type(client['guardians']) == str:
         guardians = []
         if guardians_slice_index == -1:
@@ -32,7 +33,7 @@ for player in players:
             guardians.append(dog[:guardians_slice_index])
             guardians.append(dog[guardians_slice_index + 5:])
             client['guardians'] = guardians
-
+        # sorted players list based on experience.
         if client['experience'] == 'YES':
             client['experience'] = True
             experienced_players.append(client)
@@ -40,8 +41,8 @@ for player in players:
             client['experience'] = False
             inexperienced_players.append(client)
 
-# creation of team dictionaries
-for team_tuple in enumerate(TEAMS, 1): # each team is paired w/ a #
+    # creation of team dictionaries
+for team_tuple in enumerate(TEAMS, 1):  # each team is paired w/ a #
     team = {}
     team['name'] = team_tuple[1]
     team['number'] = team_tuple[0]
@@ -49,5 +50,3 @@ for team_tuple in enumerate(TEAMS, 1): # each team is paired w/ a #
 
 print(experienced_players)
 print(inexperienced_players)
-
-    # teams = {{team_number : 1, Name : Panthers, Players : a list of handled players}}
