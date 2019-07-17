@@ -1,4 +1,5 @@
 import os
+import copy
 from constants import PLAYERS, TEAMS
 
 def clear():
@@ -7,32 +8,37 @@ def clear():
 teams = []
 experienced_players = []
 inexperienced_players = []
+players = copy.deepcopy(PLAYERS)
+
 
 #for loop to create filtered data.
-for player in PLAYERS:
+for player in players:
+    client = player
+    height = client['height']
+    guardians_slice_index = client['guardians'].find(' and ')
 
-    #converts each string of 'height' into an integer.
-    if type(player['height']) != int:
-        player['height'] = int(player['height'][0:2])
+    #slices string of 'height' then converts to int.
+    if type(height) != int:
+        client['height'] = int(height[0:2])
 
     #converts each string of 'guardians' into a list of strings.
-    if type(player['guardians']) == str:
-        guard = []
-        name = ''
-        if player['guardians'].find(' and ') == -1:
-            guard.append(player['guardians'])
+    if type(client['guardians']) == str:
+        guardians = []
+        if guardians_slice_index == -1:
+            guardians.append(client['guardians'])
+            client['guardians'] = guardians
         else:
-            dog = player['guardians']
-            guard.append(dog[:player['guardians'].find(' and ')])
-            guard.append(dog[player['guardians'].find(' and ') + 5:])
-            player['guardians'] = guard
+            dog = client['guardians']
+            guardians.append(dog[:guardians_slice_index])
+            guardians.append(dog[guardians_slice_index + 5:])
+            client['guardians'] = guardians
 
-        if player['experience'] == 'YES':
-            player['experience'] = True
-            experienced_players.append(player)
+        if client['experience'] == 'YES':
+            client['experience'] = True
+            experienced_players.append(client)
         else:
-            player['experience'] = False
-            inexperienced_players.append(player)
+            client['experience'] = False
+            inexperienced_players.append(client)
 
 # creation of team dictionaries
 for team_tuple in enumerate(TEAMS, 1): # each team is paired w/ a #
@@ -43,7 +49,5 @@ for team_tuple in enumerate(TEAMS, 1): # each team is paired w/ a #
 
 print(experienced_players)
 print(inexperienced_players)
-
-
 
     # teams = {{team_number : 1, Name : Panthers, Players : a list of handled players}}
