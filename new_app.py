@@ -1,15 +1,16 @@
-import os
 import copy
+import os
 from constants import PLAYERS, TEAMS
 
 
-teams = []
 experienced_players = []
 inexperienced_players = []
+teams = copy.deepcopy(TEAMS)
 players = copy.deepcopy(PLAYERS)
+teams_list = []
 
 
-def START_GAME():
+def start_program():
     # Data restructuring
     for player in players:
         client = player
@@ -38,20 +39,17 @@ def START_GAME():
             else:
                 client['experience'] = False
                 inexperienced_players.append(client)
+    # creation of team dictionaries
+    for team_tuple in enumerate(teams, 1):  # each team is paired w/ a #
+        team = {}
+        team['name'] = team_tuple[1]
+        team['number'] = team_tuple[0]
+        teams_list.append(team)
 
 
 def clear():
     os.system('clear' if os.name == 'posix' else 'cls')
 
-    # creation of team dictionaries
-    for team_tuple in enumerate(TEAMS, 1):  # each team is paired w/ a #
-        team = {}
-        team['name'] = team_tuple[1]
-        team['number'] = team_tuple[0]
-        teams.append(team)
-
-    print(experienced_players)
-    print(inexperienced_players)
 
 if __name__ == '__main__':
-    START_GAME()
+    start_program()
