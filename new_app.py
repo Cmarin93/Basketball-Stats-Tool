@@ -5,17 +5,32 @@ def clear():
     os.system('clear' if os.name == 'posix' else 'cls')
 
 teams = []
-# Need to acess total of players on teams.
 
-for player in PLAYERS: # selects every player.
-    #player['height']  <== change to int
+#for loop to create filtered data.
+for player in PLAYERS:
+
+    #converts each string of 'height' into an integer.
     if type(player['height']) != int:
         player['height'] = int(player['height'][0:2])
 
+    #converts each string of 'guardians' into a list of strings.
     if type(player['guardians']) == str:
-        player['guardians'] # here is the power.
+        guard = []
+        name = ''
+        if player['guardians'].find(' and ') == -1:
+            guard.append(player['guardians'])
+        else:
+            pass
+            dog = player['guardians']
+            guard.append(dog[:player['guardians'].find(' and ')])
+            guard.append(dog[player['guardians'].find(' and ') + 5:])
 
-    print(player['guardians'])
+
+    #print(player['guardians'])
+    #print(gaurd)
+    # print(type(player['guardians']))
+    #slice eeach character, if character is ' and ', provide action.
+
         # select easch gaurdian and put them into own string.
         #1) we can look for 2nd space. if not present, put into list.\
         #    if present, remove " and " then place both ends into the list as seperate values.
