@@ -58,26 +58,13 @@ def team_assign():
 
     for i in range(len(team_list)): #loops thru every team.
         int = 0
-        if len(team_list[i]['exp_registar']) < 3:
+        while len(team_list[i]['exp_registar']) < 3:
             team_list[i]['exp_registar'].append(car[0])
             car.remove(car[0])
-            team_list[i]['exp_registar'].append(car[0])
-            car.remove(car[0])
-            team_list[i]['exp_registar'].append(car[0])
-            car.remove(car[0])
-        else:
-            pass # passes onto next team.
 
-        if len(team_list[i]['inexp_registar']) < 3:
+        while len(team_list[i]['inexp_registar']) < 3:
             team_list[i]['inexp_registar'].append(boat[0])
             boat.remove(boat[0])
-            team_list[i]['inexp_registar'].append(boat[0])
-            boat.remove(boat[0])
-            team_list[i]['inexp_registar'].append(boat[0])
-            boat.remove(boat[0])
-        else:
-            pass
-
 
 def clear():
     os.system('clear' if os.name == 'posix' else 'cls')
@@ -86,7 +73,3 @@ def clear():
 if __name__ == '__main__':
     start_program()
     team_assign()
-
-    # for team_property in team_list:
-    #     print(team_property)
-        # team_property
