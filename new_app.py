@@ -8,11 +8,11 @@ inexperienced_players = []
 teams = copy.deepcopy(TEAMS)
 players = copy.deepcopy(PLAYERS)
 team_list = []
-
+players_names_dict = {}
 
 def start_program():
 
-    # creation of team dictionaries
+    # creation of team_list (a list of dictionaries))
     for team_tuple in enumerate(teams, 1):  # each team is paired w/ a #
         team = {}
         team['team_name'] = team_tuple[1]
@@ -22,7 +22,7 @@ def start_program():
         team['inexp_registar'] = []
         team_list.append(team)
 
-    # Data restructuring
+    # player data conversion
     for player in players:
         height = player['height']
         guardians_slice_index = player['guardians'].find(' and ')
@@ -34,7 +34,7 @@ def start_program():
         # converts each string of 'guardians' into a list of strings.
         if type(player['guardians']) == str:
             guardians = []
-            if guardians_slice_index == -1: # if no ' and ' is found.
+            if guardians_slice_index == -1:  # if no ' and ' is found.
                 guardians.append(player['guardians'])
                 player['guardians'] = guardians
             else:
@@ -45,30 +45,19 @@ def start_program():
             # sorted players list based on experience.
             if player['experience'] == 'YES':
                 player['experience'] = True
-                team_assign(player)
             else:
                 player['experience'] = False
-                team_assign(player)
 
 
 # balances players based on experience
-def team_assign(player):
-    if player['experience'] == True:
-        experienced_players.append(player)
-        for team in team_list:
-            if len(team['exp_registar']) < 3:
-                team['exp_registar'].append(player)
-                continue
-            else:
-                pass
-    else:
-        inexperienced_players.append(player)
-        for team in team_list:
-            if len(team['inexp_registar']) < 3:
-                team['inexp_registar'].append(player)
-                continue
-            else:
-                pass
+def team_assign():
+    for player_dict in players:
+        print(player_dict)
+        print(player_dict['name'])
+        players_names_dict['%s'].format(player_dict['name']) = player_dict
+        #pass
+    for i in range((len(players))): # i accesses each player dictionary.
+        dog = players[i]
 
 
 def clear():
@@ -77,3 +66,9 @@ def clear():
 
 if __name__ == '__main__':
     start_program()
+    team_assign()
+    players_names_dict()
+
+    # for team_property in team_list:
+    #     print(team_property)
+        # team_property
