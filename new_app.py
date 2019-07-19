@@ -67,6 +67,7 @@ def team_assign():
 
 def menu():
     while True:
+        clear()
         print('---- MENU----'.center(50))
         print('Made By: Carlos A. Marin'.center(50))
         print('')
@@ -77,7 +78,7 @@ def menu():
         try:
             choice = int(input('Enter an option > '))
             if choice == 1:
-                print('displaying team stats...')
+                team_menu()
             elif choice == 2:
                 print('quitting...')
                 break
@@ -88,6 +89,35 @@ def menu():
             invalid_option()
             continue
 
+
+def team_menu():
+    while True:
+        clear()
+        print('1) Panthers')
+        print('2) Bandits')
+        print('3) Warriors')
+        print('4) Back to main menu')
+        print('')
+        try:
+            choice = int(input('Enter an option: > '))
+            if choice == 1:
+                print('panthers stats showing...')
+            elif choice == 2:
+                print('bandits stats showing...')
+            elif choice == 3:
+                print('warriora stats showing...')
+            elif choice == 4:
+                break
+            else:
+                raise ValueError
+        except ValueError:
+            clear()
+            invalid_option()
+            continue
+
+
+def team_stats(team):
+    pass
 
 
 def clear():
