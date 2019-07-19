@@ -93,19 +93,18 @@ def menu():
 def team_menu():
     while True:
         clear()
-        print('1) Panthers')
-        print('2) Bandits')
-        print('3) Warriors')
+        for team in team_list:
+            print(str(team['number']) + ') ' + team['name'])
         print('4) Back to main menu')
         print('')
         try:
             choice = int(input('Enter an option: > '))
             if choice == 1:
-                print('panthers stats showing...')
+                team_stats(1)
             elif choice == 2:
-                print('bandits stats showing...')
+                team_stats(2)
             elif choice == 3:
-                print('warriora stats showing...')
+                team_stats(3)
             elif choice == 4:
                 break
             else:
@@ -116,8 +115,22 @@ def team_menu():
             continue
 
 
-def team_stats(team):
-    pass
+def team_stats(team_number):
+    team_numbr = team_list[team_number - 1]
+    all_team_players = ''
+    for i in team_list[team_numbr]['exp_registar']:
+        all_team_players.append(i['name'] + ', ')
+    #team['registar'] = "".join(team['exp_registar'])
+    input(all_team_players)
+    clear()
+    print('Team: ' + team['name'])
+    print('-' * 50)
+    print('Players on team:')
+    print(team['exp_registar'][0]) #exp_registar = a list of dictionaries.
+    #print(team['registar'])
+    print(team)
+    print(type(team))
+    input('continue.....')
 
 
 def clear():
@@ -125,7 +138,7 @@ def clear():
 
 
 def invalid_option():
-    print('Please enter a valid entery.\n')
+    print('Please enter a valid entry.\n')
     input('Press [Enter] to continue...')
 
 
