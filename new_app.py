@@ -11,6 +11,7 @@ team_list = []
 
 def data_conversion():
 
+
     # creation of team_list (a list of dictionaries))
     for team_tuple in enumerate(teams, 1):  # each team is paired w/ a #
         team = {}
@@ -63,6 +64,9 @@ def team_assign():
         while len(team_list[i]['inexp_registar']) < 3:
             team_list[i]['inexp_registar'].append(boat[0])
             boat.remove(boat[0])
+
+def menu():
+    pass
 
 def clear():
     os.system('clear' if os.name == 'posix' else 'cls')
