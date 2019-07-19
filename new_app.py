@@ -8,9 +8,8 @@ inexperienced_players = []
 teams = copy.deepcopy(TEAMS)
 players = copy.deepcopy(PLAYERS)
 team_list = []
-players_names_dict = {}
 
-def start_program():
+def data_conversion():
 
     # creation of team_list (a list of dictionaries))
     for team_tuple in enumerate(teams, 1):  # each team is paired w/ a #
@@ -22,7 +21,7 @@ def start_program():
         team['inexp_registar'] = []
         team_list.append(team)
 
-    # player data conversion
+    # player data conversion + creation of sorted players list based on XP.
     for player in players:
         height = player['height']
         guardians_slice_index = player['guardians'].find(' and ')
@@ -57,7 +56,6 @@ def team_assign():
     boat = copy.copy(inexperienced_players)
 
     for i in range(len(team_list)): #loops thru every team.
-        int = 0
         while len(team_list[i]['exp_registar']) < 3:
             team_list[i]['exp_registar'].append(car[0])
             car.remove(car[0])
@@ -71,5 +69,5 @@ def clear():
 
 
 if __name__ == '__main__':
-    start_program()
+    data_conversion()
     team_assign()
