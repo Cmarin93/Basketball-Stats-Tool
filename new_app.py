@@ -15,9 +15,9 @@ def start_program():
     # creation of team_list (a list of dictionaries))
     for team_tuple in enumerate(teams, 1):  # each team is paired w/ a #
         team = {}
-        team['team_name'] = team_tuple[1]
-        team['team_number'] = team_tuple[0]
-        team['team_total'] = int(len(players) / len(teams))
+        team['name'] = team_tuple[1]
+        team['number'] = team_tuple[0]
+        team['total'] = int(len(players) / len(teams))
         team['exp_registar'] = []
         team['inexp_registar'] = []
         team_list.append(team)
@@ -45,19 +45,38 @@ def start_program():
             # sorted players list based on experience.
             if player['experience'] == 'YES':
                 player['experience'] = True
+                experienced_players.append(player)
             else:
                 player['experience'] = False
+                inexperienced_players.append(player)
 
 
 # balances players based on experience
 def team_assign():
-    for player_dict in players:
-        print(player_dict)
-        print(player_dict['name'])
-        players_names_dict['%s'].format(player_dict['name']) = player_dict
-        #pass
-    for i in range((len(players))): # i accesses each player dictionary.
-        dog = players[i]
+    car = copy.copy(experienced_players)
+    boat = copy.copy(inexperienced_players)
+
+    for i in range(len(team_list)): #loops thru every team.
+        int = 0
+        if len(team_list[i]['exp_registar']) < 3:
+            team_list[i]['exp_registar'].append(car[0])
+            car.remove(car[0])
+            team_list[i]['exp_registar'].append(car[0])
+            car.remove(car[0])
+            team_list[i]['exp_registar'].append(car[0])
+            car.remove(car[0])
+        else:
+            pass # passes onto next team.
+
+        if len(team_list[i]['inexp_registar']) < 3:
+            team_list[i]['inexp_registar'].append(boat[0])
+            boat.remove(boat[0])
+            team_list[i]['inexp_registar'].append(boat[0])
+            boat.remove(boat[0])
+            team_list[i]['inexp_registar'].append(boat[0])
+            boat.remove(boat[0])
+        else:
+            pass
 
 
 def clear():
@@ -67,7 +86,6 @@ def clear():
 if __name__ == '__main__':
     start_program()
     team_assign()
-    players_names_dict()
 
     # for team_property in team_list:
     #     print(team_property)
