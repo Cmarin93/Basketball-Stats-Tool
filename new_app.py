@@ -9,11 +9,10 @@ teams = copy.deepcopy(TEAMS)
 players = copy.deepcopy(PLAYERS)
 team_list = []
 
+
 def data_conversion():
-
-
     # creation of team_list (a list of dictionaries))
-    for team_tuple in enumerate(teams, 1):  # each team is paired w/ a #
+    for team_tuple in enumerate(teams, 1):   # each team is paired w/ a #
         team = {}
         team['name'] = team_tuple[1]
         team['number'] = team_tuple[0]
@@ -34,7 +33,7 @@ def data_conversion():
         # converts each string of 'guardians' into a list of strings.
         if type(player['guardians']) == str:
             guardians = []
-            if guardians_slice_index == -1:  # if no ' and ' is found.
+            if guardians_slice_index == -1:   # if no ' and ' is found.
                 guardians.append(player['guardians'])
                 player['guardians'] = guardians
             else:
@@ -56,7 +55,7 @@ def team_assign():
     car = copy.copy(experienced_players)
     boat = copy.copy(inexperienced_players)
 
-    for i in range(len(team_list)): #loops thru every team.
+    for i in range(len(team_list)):  # loops thru every team.
         while len(team_list[i]['exp_registar']) < 3:
             team_list[i]['exp_registar'].append(car[0])
             car.remove(car[0])
@@ -65,13 +64,42 @@ def team_assign():
             team_list[i]['inexp_registar'].append(boat[0])
             boat.remove(boat[0])
 
+
 def menu():
-    pass
+    while True:
+        print('---- MENU----'.center(50))
+        print('Made By: Carlos A. Marin'.center(50))
+        print('')
+        print('Here are your choices:')
+        print('  1) Display Team Stats')
+        print('  2) Quit')
+        print('')
+        try:
+            choice = int(input('Enter an option > '))
+            if choice == 1:
+                print('displaying team stats...')
+            elif choice == 2:
+                print('quitting...')
+                break
+            else:
+                raise ValueError
+        except ValueError:
+            clear()
+            invalid_option()
+            continue
+
+
 
 def clear():
     os.system('clear' if os.name == 'posix' else 'cls')
 
 
+def invalid_option():
+    print('Please enter a valid entery.\n')
+    input('Press [Enter] to continue...')
+
+
 if __name__ == '__main__':
     data_conversion()
     team_assign()
+    menu()
