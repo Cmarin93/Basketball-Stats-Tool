@@ -124,8 +124,8 @@ def team_stats(team_number):
     print('Players on team:')
     team['registar'] = team['exp_registar'] + team['inexp_registar']
     for i in team['registar']:
-        all_team_players += i['name'] + ', '
-    input(all_team_players)
+        print(i['name'])
+    input('')
 
 
 def clear():
