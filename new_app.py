@@ -118,9 +118,8 @@ def team_menu():
 def team_stats(team_number):
     team_numbr = team_list[team_number - 1]
     all_team_players = ''
-    for i in team_list[team_numbr]['exp_registar']:
-        all_team_players.append(i['name'] + ', ')
-    #team['registar'] = "".join(team['exp_registar'])
+    #print(team_list[team_numbr]['exp_registar'])
+
     input(all_team_players)
     clear()
     print('Team: ' + team['name'])
