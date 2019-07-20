@@ -117,19 +117,22 @@ def team_menu():
 
 def team_stats(team_number):
     team = team_list[team_number - 1]
+    pre_registar = team['exp_registar'] + team['inexp_registar']
+    registar = []
     x = ', '
-
-
     clear()
     print('Team: ' + team['name'])
     print('-' * 50)
     print('Players on team:')
-    pre_registar = team['exp_registar'] + team['inexp_registar']
-    registar = []
     for i in pre_registar: # i is player (dict)
             registar.append(i['name'])
     print(x.join(registar))
-    input('')
+    print('')
+    print('Experienced players: ' + str(len(team['exp_registar'])))
+    print('')
+    print('Inexperienced players: ' + str(len(team['inexp_registar'])))
+    print('')
+    input('Press [Enter] to continue...')
 
 
 
