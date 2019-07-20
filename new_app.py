@@ -80,7 +80,7 @@ def menu():
             if choice == 1:
                 team_menu()
             elif choice == 2:
-                print('quitting...')
+                print('ending program...')
                 break
             else:
                 raise ValueError
@@ -93,6 +93,7 @@ def menu():
 def team_menu():
     while True:
         clear()
+        # list of teams assigned to their team number.
         for team in team_list:
             print(str(team['number']) + ') ' + team['name'])
         print('4) Back to main menu')
@@ -115,22 +116,22 @@ def team_menu():
             continue
 
 
-def team_stats(team_number):
-    team = team_list[team_number - 1]
+def team_stats(choice):
+    team = team_list[choice - 1]
     pre_registar = team['exp_registar'] + team['inexp_registar']
     pre_height = 0
     registar = []
     team_guardians = []
     x = ', '
+    for player in pre_registar:  # i is player (dict)
+            registar.append(player['name'])
+            pre_height += player['height']
+            for guardian in player['guardians']:
+                team_guardians.append(guardian)
     clear()
     print('Team: ' + team['name'])
     print('-' * 50)
     print('Players on team:')
-    for i in pre_registar: # i is player (dict)
-            registar.append(i['name'])
-            pre_height += i['height']
-            for guardian in i['guardians']:
-                team_guardians.append(guardian)
     avg_height = (pre_height / team['total'])
     print(x.join(registar))
     print('')
@@ -138,13 +139,12 @@ def team_stats(team_number):
     print('')
     print('Inexperienced players: ' + str(len(team['inexp_registar'])))
     print('')
-    print('Teams average height(inches): ' + str(avg_height))
+    print('Teams average height: ' + str(avg_height) + '"')
     print('')
     print('Guardians of team players: ')
     print(x.join(team_guardians))
     print('')
     input('Press [Enter] to continue...')
-
 
 
 def clear():
