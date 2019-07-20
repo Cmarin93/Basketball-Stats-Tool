@@ -118,7 +118,9 @@ def team_menu():
 def team_stats(team_number):
     team = team_list[team_number - 1]
     pre_registar = team['exp_registar'] + team['inexp_registar']
+    pre_height = 0
     registar = []
+    team_guardians = []
     x = ', '
     clear()
     print('Team: ' + team['name'])
@@ -126,11 +128,20 @@ def team_stats(team_number):
     print('Players on team:')
     for i in pre_registar: # i is player (dict)
             registar.append(i['name'])
+            pre_height += i['height']
+            for guardian in i['guardians']:
+                team_guardians.append(guardian)
+    avg_height = (pre_height / team['total'])
     print(x.join(registar))
     print('')
     print('Experienced players: ' + str(len(team['exp_registar'])))
     print('')
     print('Inexperienced players: ' + str(len(team['inexp_registar'])))
+    print('')
+    print('Teams average height(inches): ' + str(avg_height))
+    print('')
+    print('Guardians of team players: ')
+    print(x.join(team_guardians))
     print('')
     input('Press [Enter] to continue...')
 
