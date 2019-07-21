@@ -3,11 +3,11 @@ import os
 from constants import PLAYERS, TEAMS
 
 
-experienced_players = []
-inexperienced_players = []
 teams = copy.deepcopy(TEAMS)
 players = copy.deepcopy(PLAYERS)
 team_list = []
+experienced_players = []
+inexperienced_players = []
 
 
 def data_conversion():
