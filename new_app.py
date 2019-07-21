@@ -70,7 +70,7 @@ def team_assign():
 def menu():
     while True:
         clear()
-        print('---- MENU----'.center(50))
+        print('---- Basketball Stats Tool ----'.center(50))
         print('Made By: Carlos A. Marin'.center(50))
         print('')
         print('Here are your choices:')
