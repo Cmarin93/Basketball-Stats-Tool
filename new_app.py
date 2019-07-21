@@ -52,13 +52,14 @@ def data_conversion():
 
 # balances players based on experience
 def team_assign():
-    car = copy.copy(experienced_players)
+    xp_list = copy.copy(experienced_players)
     boat = copy.copy(inexperienced_players)
 
     for i in range(len(team_list)):  # loops thru every team.
-        while len(team_list[i]['exp_registar']) < 3:
-            team_list[i]['exp_registar'].append(car[0])
-            car.remove(car[0])
+        exprienced_players = team_list[i]['exp_registar']
+        while len(exprienced_players) < 3:
+            exprienced_players.append(xp_list[0])
+            xp_list.remove(xp_list[0])
 
         while len(team_list[i]['inexp_registar']) < 3:
             team_list[i]['inexp_registar'].append(boat[0])
