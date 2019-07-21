@@ -33,7 +33,7 @@ def data_conversion():
         # converts each string of 'guardians' into a list of strings.
         if type(player['guardians']) == str:
             guardians = []
-            if guardians_slice_index == -1:   # if no ' and ' is found.
+            if guardians_slice_index == -1:   # if ' and ' is not found.
                 guardians.append(player['guardians'])
                 player['guardians'] = guardians
             else:
