@@ -74,7 +74,7 @@ def menu():
     while True:
         clear()
         print('--⭐-- Basketball Stats Tool --⭐--'.center(50))
-        print('Made By: Carlos A. Marin'.center(50))
+        print('coded by: Carlos A. Marin'.center(50))
         print(border)
         print('')
         print('Here are your choices:')
