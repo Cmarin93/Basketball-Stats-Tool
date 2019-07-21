@@ -2,13 +2,14 @@ import copy
 import os
 from constants import PLAYERS, TEAMS
 
+
+buttons = ['❶', '❷', '❸']
 border = ('☰' * 35)
 teams = copy.deepcopy(TEAMS)
 players = copy.deepcopy(PLAYERS)
 team_list = []
 experienced_players = []
 inexperienced_players = []
-buttons = ['❶', '❷', '❸']
 
 
 def data_conversion():
@@ -73,7 +74,7 @@ def menu():
     while True:
         clear()
         print('--⭐-- Basketball Stats Tool --⭐--'.center(50))
-        print('Made By: Carlos A. Marin'.center(50) )
+        print('Made By: Carlos A. Marin'.center(50))
         print(border)
         print('')
         print('Here are your choices:')
