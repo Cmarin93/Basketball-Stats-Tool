@@ -2,7 +2,7 @@ import copy
 import os
 from constants import PLAYERS, TEAMS
 
-border = ('⚊' * 50)
+border = ('☰' * 35)
 teams = copy.deepcopy(TEAMS)
 players = copy.deepcopy(PLAYERS)
 team_list = []
@@ -70,8 +70,8 @@ def team_assign():
 def menu():
     while True:
         clear()
-        print('---- Basketball Stats Tool ----'.center(50))
-        print('Made By: Carlos A. Marin ☕'.center(50))
+        print('--⭐-- Basketball Stats Tool --⭐--'.center(50))
+        print('Made By: Carlos A. Marin ☕'.center(50) )
         print(border)
         print('')
         print('Here are your choices:')
@@ -79,7 +79,7 @@ def menu():
         print('  2) Quit')
         print('')
         try:
-            choice = int(input('Enter an option > '))
+            choice = int(input('Enter an option ⭢ '))
             if choice == 1:
                 team_menu()
             elif choice == 2:
@@ -96,15 +96,16 @@ def menu():
 def team_menu():
     while True:
         clear()
-        print('TEAMS'.center(50))
+        print('⚡ TEAMS ⚡'.center(50))
         print(border)
+        print('')
         # list of teams assigned to their team number.
         for team in team_list:
-            print(str(team['number']) + ') ' + '⚡' + team['name'] + '⚡')
+            print(str(team['number']) + ') ' + team['name'])
         print('4) Back to main menu')
         print('')
         try:
-            choice = int(input('Enter an option: > '))
+            choice = int(input('Enter an option: ⭢ '))
             if choice == 1:
                 team_stats(1)
             elif choice == 2:
@@ -135,8 +136,8 @@ def team_stats(choice):
                 team_guardians.append(guardian)
     avg_height = (pre_height / team['total'])
     clear()
-    print('Team: ' + '⚞' + team['name'] + '⚟' + 'Page(1/2)'.center(70))
-    print('-' * 50)
+    print('⚞' + team['name'] + '⚟' + 'Page(1/2)'.center(70))
+    print(border)
     print('Players on team:')
     print(x.join(registar))
     print('')
@@ -144,8 +145,8 @@ def team_stats(choice):
     print('')
     input('Press [Enter] to continue...')
     clear()
-    print('Team: ' + '⚞' + team['name'] + '⚟' + 'Page(2/2)'.center(70))
-    print('-' * 50)
+    print('⚞' + team['name'] + '⚟' + 'Page(2/2)'.center(70))
+    print(border)
     print('Experienced players: ' + str(len(team['exp_registar'])))
     print('Inexperienced players: ' + str(len(team['inexp_registar'])))
     print('')
