@@ -8,7 +8,7 @@ players = copy.deepcopy(PLAYERS)
 team_list = []
 experienced_players = []
 inexperienced_players = []
-buttons = [❶, ❷, ❸, ❹]
+buttons = ['❶', '❷', '❸']
 
 
 def data_conversion():
@@ -20,6 +20,7 @@ def data_conversion():
         team['total'] = int(len(players) / len(teams))
         team['exp_registar'] = []
         team['inexp_registar'] = []
+        team['number_icon'] = buttons[team['number'] - 1]
         team_list.append(team)
 
     # player data conversion + creation of sorted players list based on XP.
@@ -72,7 +73,7 @@ def menu():
     while True:
         clear()
         print('--⭐-- Basketball Stats Tool --⭐--'.center(50))
-        print('Made By: Carlos A. Marin ☕'.center(50) )
+        print('Made By: Carlos A. Marin'.center(50) )
         print(border)
         print('')
         print('Here are your choices:')
@@ -102,8 +103,8 @@ def team_menu():
         print('')
         # list of teams assigned to their team number.
         for team in team_list:
-            print(str(team['number']) + ') ' + team['name'])
-        print('4) Back to main menu')
+            print(str(team['number_icon']) + ') ' + team['name'])
+        print('❹ Back to main menu')
         print('')
         try:
             choice = int(input('Enter an option: ⭢ '))
