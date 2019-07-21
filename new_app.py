@@ -56,14 +56,14 @@ def team_assign():
     inxp_list = copy.copy(inexperienced_players)
 
     for i in range(len(team_list)):  # loops thru every team.
-        exprienced_players = team_list[i]['exp_registar']
-        inexperienced_players = team_list[i]['inexp_registar']
-        while len(exprienced_players) < 3:
-            exprienced_players.append(xp_list[0])
+        teams_exprienced_players = team_list[i]['exp_registar']
+        teams_inexperienced_players = team_list[i]['inexp_registar']
+        while len(teams_exprienced_players) < 3:
+            teams_exprienced_players.append(xp_list[0])
             xp_list.remove(xp_list[0])
 
-        while len(inexperienced_players) < 3:
-            inexperienced_players.append(inxp_list[0])
+        while len(teams_inexperienced_players) < 3:
+            teams_inexperienced_players.append(inxp_list[0])
             inxp_list.remove(inxp_list[0])
 
 
