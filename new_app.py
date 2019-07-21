@@ -127,6 +127,7 @@ def team_menu():
 
 def team_stats(choice):
     team = team_list[choice - 1]
+    team_title = '⚞' + team['name'] + '⚟'
     pre_registar = team['exp_registar'] + team['inexp_registar']
     pre_height = 0
     registar = []
@@ -139,7 +140,7 @@ def team_stats(choice):
                 team_guardians.append(guardian)
     avg_height = (pre_height / team['total'])
     clear()
-    print('⚞' + team['name'] + '⚟' + 'Page(1/2)'.center(70))
+    print(team_title.center(50) + 'Page(1/2)')
     print(border)
     print('')
     print('Players on team:')
@@ -149,7 +150,7 @@ def team_stats(choice):
     print('')
     input('Press [Enter] to continue...')
     clear()
-    print('⚞' + team['name'] + '⚟' + 'Page(2/2)'.center(70))
+    print(team_title.center(50) + 'Page(2/2)')
     print(border)
     print('')
     print('Experienced players: ' + str(len(team['exp_registar'])))
@@ -166,7 +167,7 @@ def clear():
 
 
 def invalid_option():
-    print('Please enter a valid entry.\n')
+    print('⛔ Please enter a valid entry. ⛔\n')
     input('Press [Enter] to continue...')
 
 
