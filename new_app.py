@@ -142,7 +142,6 @@ def team_stats(choice):
     input('Press [Enter] to continue...')
     print('Team: ' + team['name'])
     print('-' * 50)
-    print('')
     print('Experienced players: ' + str(len(team['exp_registar'])))
     print('Inexperienced players: ' + str(len(team['inexp_registar'])))
     print('')
