@@ -8,6 +8,7 @@ players = copy.deepcopy(PLAYERS)
 team_list = []
 experienced_players = []
 inexperienced_players = []
+buttons = [❶, ❷, ❸, ❹]
 
 
 def data_conversion():
@@ -75,15 +76,15 @@ def menu():
         print(border)
         print('')
         print('Here are your choices:')
-        print('  1) Display Team Stats')
-        print('  2) Quit')
+        print('  ❶ Display Team Stats')
+        print('  ❷ Quit')
         print('')
         try:
             choice = int(input('Enter an option ⭢ '))
             if choice == 1:
                 team_menu()
             elif choice == 2:
-                print('ending program...')
+                print('⛔ending program⛔'.center(50))
                 break
             else:
                 raise ValueError
