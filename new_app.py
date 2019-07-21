@@ -85,7 +85,7 @@ def menu():
             if choice == 1:
                 team_menu()
             elif choice == 2:
-                print('⛔ending program⛔'.center(50))
+                print('⛔program terminated⛔'.center(50))
                 break
             else:
                 raise ValueError
@@ -103,7 +103,7 @@ def team_menu():
         print('')
         # list of teams assigned to their team number.
         for team in team_list:
-            print(str(team['number_icon']) + ') ' + team['name'])
+            print(str(team['number_icon']) + ' ' + team['name'])
         print('❹ Back to main menu')
         print('')
         try:
@@ -140,6 +140,7 @@ def team_stats(choice):
     clear()
     print('⚞' + team['name'] + '⚟' + 'Page(1/2)'.center(70))
     print(border)
+    print('')
     print('Players on team:')
     print(x.join(registar))
     print('')
@@ -149,6 +150,7 @@ def team_stats(choice):
     clear()
     print('⚞' + team['name'] + '⚟' + 'Page(2/2)'.center(70))
     print(border)
+    print('')
     print('Experienced players: ' + str(len(team['exp_registar'])))
     print('Inexperienced players: ' + str(len(team['inexp_registar'])))
     print('')
