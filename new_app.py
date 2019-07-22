@@ -175,3 +175,4 @@ if __name__ == '__main__':
     data_conversion()
     team_assign()
     menu()
+    print('crazy', 'dog')
