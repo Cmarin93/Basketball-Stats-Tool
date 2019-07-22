@@ -3,8 +3,8 @@ import os
 from constants import PLAYERS, TEAMS
 
 
-buttons = ['❶', '❷', '❸']
-border = ('☰' * 35)
+BUTTONS = ['❶', '❷', '❸']
+BORDER = ('☰' * 35)
 teams = copy.deepcopy(TEAMS)
 players = copy.deepcopy(PLAYERS)
 team_list = []
@@ -21,7 +21,7 @@ def data_conversion():
         team['total'] = int(len(players) / len(teams))
         team['exp_registar'] = []
         team['inexp_registar'] = []
-        team['number_icon'] = buttons[team['number'] - 1]
+        team['number_icon'] = BUTTONS[team['number'] - 1]
         team_list.append(team)
 
     # player data conversion + creation of sorted players list based on XP.
@@ -75,7 +75,7 @@ def menu():
         clear()
         print('--⭐-- Basketball Stats Tool --⭐--'.center(50))
         print('coded by: Carlos A. Marin'.center(50))
-        print(border)
+        print(BORDER)
         print('')
         print('Here are your choices:')
         print('  ❶ Display Team Stats')
@@ -100,7 +100,7 @@ def team_menu():
     while True:
         clear()
         print('⚡ TEAMS ⚡'.center(50))
-        print(border)
+        print(BORDER)
         print('')
         # list of teams assigned to their team number.
         for team in team_list:
@@ -141,7 +141,7 @@ def team_stats(choice):
     avg_height = (pre_height / team['total'])
     clear()
     print(team_title.center(50) + 'Page(1/2)')
-    print(border)
+    print(BORDER)
     print('')
     print('Players on team:')
     print(x.join(registar))
@@ -151,7 +151,7 @@ def team_stats(choice):
     input('Press [Enter] to continue...')
     clear()
     print(team_title.center(50) + 'Page(2/2)')
-    print(border)
+    print(BORDER)
     print('')
     print('Experienced players: ' + str(len(team['exp_registar'])))
     print('Inexperienced players: ' + str(len(team['inexp_registar'])))
