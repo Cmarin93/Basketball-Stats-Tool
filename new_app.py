@@ -54,7 +54,7 @@ def data_conversion():
 
 
 # balances players based on experience
-def team_assign():
+def team_assignments():
     xp_list = copy.copy(experienced_players)
     inxp_list = copy.copy(inexperienced_players)
 
@@ -68,18 +68,6 @@ def team_assign():
         while len(teams_inexperienced_players) < 3:
             teams_inexperienced_players.append(inxp_list[0])
             inxp_list.remove(inxp_list[0])
-
-
-def menu_text():
-    clear()
-    print('--⭐-- Basketball Stats Tool --⭐--'.center(50))
-    print('coded by: Carlos A. Marin'.center(50))
-    print(BORDER)
-    print('')
-    print('Here are your choices:')
-    print('  ❶ Display Team Stats')
-    print('  ❷ Quit')
-    print('')
 
 
 def menu():
@@ -100,15 +88,15 @@ def menu():
             continue
 
 
-def team_text():
+def menu_text():
     clear()
-    print('⚡ TEAMS ⚡'.center(50))
+    print('--⭐-- Basketball Stats Tool --⭐--'.center(50))
+    print('coded by: Carlos A. Marin'.center(50))
     print(BORDER)
     print('')
-    # list of teams assigned to their team number.
-    for team in team_list:
-        print(str(team['number_icon']) + ' ' + team['name'])
-    print('❹ Back to main menu')
+    print('Here are your choices:')
+    print('  ❶ Display Team Stats')
+    print('  ❷ Quit')
     print('')
 
 
@@ -133,31 +121,50 @@ def team_menu():
             continue
 
 
+def team_text():
+    clear()
+    print('⚡ TEAMS ⚡'.center(50))
+    print(BORDER)
+    print('')
+    # list of teams assigned to their team number.
+    for team in team_list:
+        print(str(team['number_icon']) + ' ' + team['name'])
+    print('❹ Back to main menu')
+    print('')
+
+
 def team_stats(choice):
     team = team_list[choice - 1]
-    team_title = '⚞' + team['name'] + '⚟'
     pre_registar = team['exp_registar'] + team['inexp_registar']
     pre_height = 0
     registar = []
     team_guardians = []
-    x = ', '
-    for player in pre_registar:  # i is player (dict)
+    # sum of player heights, guardians + players list.
+    for player in pre_registar:
             registar.append(player['name'])
             pre_height += player['height']
             for guardian in player['guardians']:
                 team_guardians.append(guardian)
     avg_height = (pre_height / team['total'])
+    team_stats_text(team, registar, avg_height, team_guardians)
+
+
+def team_stats_text(team, registar, avg_height, team_guardians):
+    team_title = '⚞' + team['name'] + '⚟'
+    seperator = ', '
     clear()
+    # Page 1
     print(team_title.center(50) + 'Page(1/2)')
     print(BORDER)
     print('')
     print('Players on team:')
-    print(x.join(registar))
+    print(seperator.join(registar))
     print('')
     print('Teams average height: ' + str(avg_height) + '"')
     print('')
     input('Press [Enter] to continue...')
     clear()
+    # Page 2
     print(team_title.center(50) + 'Page(2/2)')
     print(BORDER)
     print('')
@@ -165,7 +172,7 @@ def team_stats(choice):
     print('Inexperienced players: ' + str(len(team['inexp_registar'])))
     print('')
     print('Guardians of players on team: ')
-    print(x.join(team_guardians))
+    print(seperator.join(team_guardians))
     print('')
     input('Press [Enter] to continue...')
 
@@ -181,5 +188,5 @@ def invalid_option():
 
 if __name__ == '__main__':
     data_conversion()
-    team_assign()
+    team_assignments()
     menu()
