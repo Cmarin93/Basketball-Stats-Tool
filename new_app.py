@@ -70,17 +70,21 @@ def team_assign():
             inxp_list.remove(inxp_list[0])
 
 
+def menu_text():
+    clear()
+    print('--⭐-- Basketball Stats Tool --⭐--'.center(50))
+    print('coded by: Carlos A. Marin'.center(50))
+    print(BORDER)
+    print('')
+    print('Here are your choices:')
+    print('  ❶ Display Team Stats')
+    print('  ❷ Quit')
+    print('')
+
+
 def menu():
     while True:
-        clear()
-        print('--⭐-- Basketball Stats Tool --⭐--'.center(50))
-        print('coded by: Carlos A. Marin'.center(50))
-        print(BORDER)
-        print('')
-        print('Here are your choices:')
-        print('  ❶ Display Team Stats')
-        print('  ❷ Quit')
-        print('')
+        menu_text()
         try:
             choice = int(input('Enter an option ⭢ '))
             if choice == 1:
@@ -96,17 +100,21 @@ def menu():
             continue
 
 
+def team_text():
+    clear()
+    print('⚡ TEAMS ⚡'.center(50))
+    print(BORDER)
+    print('')
+    # list of teams assigned to their team number.
+    for team in team_list:
+        print(str(team['number_icon']) + ' ' + team['name'])
+    print('❹ Back to main menu')
+    print('')
+
+
 def team_menu():
     while True:
-        clear()
-        print('⚡ TEAMS ⚡'.center(50))
-        print(BORDER)
-        print('')
-        # list of teams assigned to their team number.
-        for team in team_list:
-            print(str(team['number_icon']) + ' ' + team['name'])
-        print('❹ Back to main menu')
-        print('')
+        team_text()
         try:
             choice = int(input('Enter an option: ⭢ '))
             if choice == 1:
@@ -175,4 +183,3 @@ if __name__ == '__main__':
     data_conversion()
     team_assign()
     menu()
-    print('crazy', 'dog')
