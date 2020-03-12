@@ -1,87 +1,192 @@
+import copy
 import os
-from constants import PLAYERS
-from constants import TEAMS
+from constants import PLAYERS, TEAMS
+
+
+BUTTONS = ['❶', '❷', '❸']
+BORDER = ('☰' * 35)
+teams = copy.deepcopy(TEAMS)
+players = copy.deepcopy(PLAYERS)
+team_list = []
+experienced_players = []
+inexperienced_players = []
+
+
+def data_conversion():
+    # creation of team_list (a list of dictionaries))
+    for team_tuple in enumerate(teams, 1):   # each team is paired w/ a #
+        team = {}
+        team['name'] = team_tuple[1]
+        team['number'] = team_tuple[0]
+        team['total'] = int(len(players) / len(teams))
+        team['exp_registar'] = []
+        team['inexp_registar'] = []
+        team['number_icon'] = BUTTONS[team['number'] - 1]
+        team_list.append(team)
+
+    # player data conversion + creation of sorted players list based on XP.
+    for player in players:
+        height = player['height']
+        guardians_slice_index = player['guardians'].find(' and ')
+
+        # slices string of 'height' then converts to int.
+        if type(height) != int:
+            player['height'] = int(height[0:2])
+
+        # converts each string of 'guardians' into a list of strings.
+        if type(player['guardians']) == str:
+            guardians = []
+            if guardians_slice_index == -1:   # if ' and ' is not found.
+                guardians.append(player['guardians'])
+                player['guardians'] = guardians
+            else:
+                guardian_string = player['guardians']
+                guardians.append(guardian_string[:guardians_slice_index])
+                guardians.append(guardian_string[guardians_slice_index + 5:])
+                player['guardians'] = guardians
+            # sorted players list based on experience.
+            if player['experience'] == 'YES':
+                player['experience'] = True
+                experienced_players.append(player)
+            else:
+                player['experience'] = False
+                inexperienced_players.append(player)
+
+
+# balances players based on experience
+def team_assignments():
+    xp_list = copy.copy(experienced_players)
+    inxp_list = copy.copy(inexperienced_players)
+
+    for i in range(len(team_list)):  # loops thru every team.
+        teams_exprienced_players = team_list[i]['exp_registar']
+        teams_inexperienced_players = team_list[i]['inexp_registar']
+        while len(teams_exprienced_players) < 3:
+            teams_exprienced_players.append(xp_list[0])
+            xp_list.remove(xp_list[0])
+
+        while len(teams_inexperienced_players) < 3:
+            teams_inexperienced_players.append(inxp_list[0])
+            inxp_list.remove(inxp_list[0])
+
+
+def menu():
+    while True:
+        menu_text()
+        try:
+            choice = int(input('Enter an option ⭢ '))
+            if choice == 1:
+                team_menu()
+            elif choice == 2:
+                print('⛔program terminated⛔'.center(50))
+                break
+            else:
+                raise ValueError
+        except ValueError:
+            clear()
+            invalid_option()
+            continue
+
+
+def menu_text():
+    clear()
+    print('--⭐-- Basketball Stats Tool --⭐--'.center(50))
+    print('coded by: Carlos A. Marin'.center(50))
+    print(BORDER)
+    print('')
+    print('Here are your choices:')
+    print('  ❶ Display Team Stats')
+    print('  ❷ Quit')
+    print('')
+
+
+def team_menu():
+    while True:
+        team_text()
+        try:
+            choice = int(input('Enter an option: ⭢ '))
+            if choice == 1:
+                team_stats(1)
+            elif choice == 2:
+                team_stats(2)
+            elif choice == 3:
+                team_stats(3)
+            elif choice == 4:
+                break
+            else:
+                raise ValueError
+        except ValueError:
+            clear()
+            invalid_option()
+            continue
+
+
+def team_text():
+    clear()
+    print('⚡ TEAMS ⚡'.center(50))
+    print(BORDER)
+    print('')
+    # list of teams assigned to their team number.
+    for team in team_list:
+        print(str(team['number_icon']) + ' ' + team['name'])
+    print('❹ Back to main menu')
+    print('')
+
+
+def team_stats(choice):
+    team = team_list[choice - 1]
+    pre_registar = team['exp_registar'] + team['inexp_registar']
+    pre_height = 0
+    registar = []
+    team_guardians = []
+    # sum of player heights, guardians + players list.
+    for player in pre_registar:
+            registar.append(player['name'])
+            pre_height += player['height']
+            for guardian in player['guardians']:
+                team_guardians.append(guardian)
+    avg_height = (pre_height / team['total'])
+    team_stats_text(team, registar, avg_height, team_guardians)
+
+
+def team_stats_text(team, registar, avg_height, team_guardians):
+    team_title = '⚞' + team['name'] + '⚟'
+    seperator = ', '
+    clear()
+    # Page 1
+    print(team_title.center(50) + 'Page(1/2)')
+    print(BORDER)
+    print('')
+    print('Players on team:')
+    print(seperator.join(registar))
+    print('')
+    print('Teams average height: ' + str(avg_height) + '"')
+    print('')
+    input('Press [Enter] to continue...')
+    clear()
+    # Page 2
+    print(team_title.center(50) + 'Page(2/2)')
+    print(BORDER)
+    print('')
+    print('Experienced players: ' + str(len(team['exp_registar'])))
+    print('Inexperienced players: ' + str(len(team['inexp_registar'])))
+    print('')
+    print('Guardians of players on team: ')
+    print(seperator.join(team_guardians))
+    print('')
+    input('Press [Enter] to continue...')
 
 
 def clear():
     os.system('clear' if os.name == 'posix' else 'cls')
 
-def total_players():
-    total_players = 0
-    for player in PLAYERS:
-        total_players += 1
-    return total_players
 
-def total_teams():
-    total_teams = 0
-    for team in TEAMS:
-        total_teams += 1
-    return total_teams
-players_per_team = (total_players() / total_teams())
-input(players_per_team)
-# list of xp_player & in-xp_players
-def seperation():
-    experienced_players = []
-    inexperienced_players = []
-    for player in PLAYERS: #acessing each player dictionary
-        if player['experience'] == 'YES':
-            experienced_players.append(player)
-        elif player['experience'] == 'NO':
-            inexperienced_players.append(player)
-    return experienced_players, inexperienced_players
-
-experienced_players, inexperienced_players = seperation()
-input(len(experienced_players))
 def invalid_option():
-    clear()
-    print('Please enter a valid entery.\n')
+    print('⛔ Please enter a valid entry. ⛔\n')
     input('Press [Enter] to continue...')
 
-def menu():
-    menu_looping = True
-    while menu_looping:
-        try:
-            clear()
-            print('\n')
-            print('Basketball Team Stats Tool')
-            print('by Carlos A. Marin')
-            print('\n\n')
-            print('1) display team stats')
-            print('2) quit')
-            print('\n')
-            option = int(input('>>> '))
-            if option == 1:
-                team_menu()
-            elif option == 2:
-                break
-            else:
-                invalid_option()
-        except ValueError:
-            invalid_option()
-
-def team_menu():
-    menu_looping1 = True
-    while menu_looping1:
-        try:
-            clear()
-            print('\n')
-            print('Teams')
-            print('\n\n')
-            # make teams dict. into a numbered list.
-            # for num, team in teams:
-            #     print("%s) %s" % (num, team))
-            print('\n')
-            choice = int(input('>>> '))
-            if choice == 1:
-                input('showing team1 stats')
-            elif choice == 2:
-                input('showing team2 stats')
-            elif choice == 3:
-                input('showing team3 stats')
-            else:
-                invalid_option()
-        except ValueError:
-            invalid_option()
 
 if __name__ == '__main__':
+    data_conversion()
+    team_assignments()
     menu()
