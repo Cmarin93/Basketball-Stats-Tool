@@ -4,36 +4,37 @@ from constants import PLAYERS, TEAMS
 
 
 BUTTONS = ['❶', '❷', '❸']
-BORDER = ('☰' * 35)
+press_enter = "\nPress [Enter] to continue..."
 teams = copy.deepcopy(TEAMS)
 players = copy.deepcopy(PLAYERS)
 team_list = []
 experienced_players = []
 inexperienced_players = []
 
-
+def BORDER(string):
+    print("\n  ╔" + ((len(string)+2) * "═") + "╗")
+    print("  ║ " + string + " ║")
+    print("  ╚" + ((len(string)+2) * "═") + "╝")
+    	
 def data_conversion():
-    # creation of team_list (a list of dictionaries))
-    for team_tuple in enumerate(teams, 1):   # each team is paired w/ a #
+    for team_tuple in enumerate(teams, 1): # loop thru teams
         team = {}
-        team['name'] = team_tuple[1]
         team['number'] = team_tuple[0]
+        team['number_icon'] = BUTTONS[team['number'] - 1]
+        team['name'] = team_tuple[1]
         team['total'] = int(len(players) / len(teams))
         team['exp_registar'] = []
         team['inexp_registar'] = []
-        team['number_icon'] = BUTTONS[team['number'] - 1]
         team_list.append(team)
 
-    # player data conversion + creation of sorted players list based on XP.
     for player in players:
         height = player['height']
-        guardians_slice_index = player['guardians'].find(' and ')
+        guardians_slice_index = player['guardians'].find(' and ')   # The starting index of " and "
 
-        # slices string of 'height' then converts to int.
         if type(height) != int:
             player['height'] = int(height[0:2])
 
-        # converts each string of 'guardians' into a list of strings.
+        # guardian data conversion + xp list creation
         if type(player['guardians']) == str:
             guardians = []
             if guardians_slice_index == -1:   # if ' and ' is not found.
@@ -44,7 +45,7 @@ def data_conversion():
                 guardians.append(guardian_string[:guardians_slice_index])
                 guardians.append(guardian_string[guardians_slice_index + 5:])
                 player['guardians'] = guardians
-            # sorted players list based on experience.
+            # xp list sorting.
             if player['experience'] == 'YES':
                 player['experience'] = True
                 experienced_players.append(player)
@@ -52,8 +53,6 @@ def data_conversion():
                 player['experience'] = False
                 inexperienced_players.append(player)
 
-
-# balances players based on experience
 def team_assignments():
     xp_list = copy.copy(experienced_players)
     inxp_list = copy.copy(inexperienced_players)
@@ -62,23 +61,21 @@ def team_assignments():
         teams_exprienced_players = team_list[i]['exp_registar']
         teams_inexperienced_players = team_list[i]['inexp_registar']
         while len(teams_exprienced_players) < 3:
-            teams_exprienced_players.append(xp_list[0])
-            xp_list.remove(xp_list[0])
-
+            teams_exprienced_players.append(xp_list[0]) # adds to register
+            xp_list.remove(xp_list[0])  # removes from pool
         while len(teams_inexperienced_players) < 3:
             teams_inexperienced_players.append(inxp_list[0])
             inxp_list.remove(inxp_list[0])
-
 
 def menu():
     while True:
         menu_text()
         try:
-            choice = int(input('Enter an option ⭢ '))
+            choice = int(input(' Enter an option: '))
             if choice == 1:
                 team_menu()
             elif choice == 2:
-                print('⛔program terminated⛔'.center(50))
+                BORDER('Program Terminated')
                 break
             else:
                 raise ValueError
@@ -87,24 +84,19 @@ def menu():
             invalid_option()
             continue
 
-
 def menu_text():
     clear()
-    print('--⭐-- Basketball Stats Tool --⭐--'.center(50))
-    print('coded by: Carlos A. Marin'.center(50))
-    print(BORDER)
-    print('')
-    print('Here are your choices:')
+    BORDER('Basketball Stats Tool')
+    print('   coded by: Carlos A. Marin\n\n Here are your choices:')
     print('  ❶ Display Team Stats')
-    print('  ❷ Quit')
-    print('')
+    print('  ❷ Quit\n')
 
 
 def team_menu():
     while True:
         team_text()
         try:
-            choice = int(input('Enter an option: ⭢ '))
+            choice = int(input(' Enter an option: '))
             if choice == 1:
                 team_stats(1)
             elif choice == 2:
@@ -123,14 +115,10 @@ def team_menu():
 
 def team_text():
     clear()
-    print('⚡ TEAMS ⚡'.center(50))
-    print(BORDER)
-    print('')
-    # list of teams assigned to their team number.
+    BORDER('TEAMS')
     for team in team_list:
-        print(str(team['number_icon']) + ' ' + team['name'])
-    print('❹ Back to main menu')
-    print('')
+        print('\n ' + str(team['number_icon']) + ' ' + team['name'] + '\n ❹ Back to main menu\n')
+    #print('\n ❹ Back to main menu\n')
 
 
 def team_stats(choice):
@@ -150,31 +138,26 @@ def team_stats(choice):
 
 
 def team_stats_text(team, registar, avg_height, team_guardians):
-    team_title = '⚞' + team['name'] + '⚟'
+    team_title = '■  ' + team['name'] + '  ■'
     seperator = ', '
     clear()
     # Page 1
-    print(team_title.center(50) + 'Page(1/2)')
-    print(BORDER)
-    print('')
-    print('Players on team:')
+    BORDER(team_title)
+    print('\nPlayers on team:')
     print(seperator.join(registar))
-    print('')
-    print('Teams average height: ' + str(avg_height) + '"')
-    print('')
-    input('Press [Enter] to continue...')
+    print('\nTeams average height: ' + str(avg_height) + '"')
+    print('\nPage(1/2)')
+    input(press_enter)
     clear()
     # Page 2
-    print(team_title.center(50) + 'Page(2/2)')
-    print(BORDER)
-    print('')
-    print('Experienced players: ' + str(len(team['exp_registar'])))
+    BORDER(team_title)
+    print('\nExperienced players: ' + str(len(team['exp_registar'])))
     print('Inexperienced players: ' + str(len(team['inexp_registar'])))
-    print('')
-    print('Guardians of players on team: ')
+    print('\nGuardians of players on team: ')
+    breakpoint()
     print(seperator.join(team_guardians))
-    print('')
-    input('Press [Enter] to continue...')
+    print('\nPage(2/2)')
+    input(press_enter)
 
 
 def clear():
@@ -182,8 +165,8 @@ def clear():
 
 
 def invalid_option():
-    print('⛔ Please enter a valid entry. ⛔\n')
-    input('Press [Enter] to continue...')
+    BORDER('Please enter a valid entry.')
+    input(press_enter)
 
 
 if __name__ == '__main__':
