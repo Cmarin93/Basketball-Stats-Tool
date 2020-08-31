@@ -29,7 +29,8 @@ def data_conversion():
 
     for player in players:
         height = player['height']
-        guardians_slice_index = player['guardians'].find(' and ')   # The starting index of " and "
+        # The starting index of " and "
+        guardians_slice_index = player['guardians'].find(' and ')   
 
         if type(height) != int:
             player['height'] = int(height[0:2])
