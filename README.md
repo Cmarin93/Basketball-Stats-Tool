@@ -4,4 +4,4 @@
 ![Preview](SS.png)
         Created By: Carlos A. Marin - July 2019
 
-![Bottom](Art/botton.png)
+![Bottom](Art/botton.png?raw=true "bottom")
